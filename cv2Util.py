@@ -3,13 +3,13 @@ import numpy as np
 import struct
 
 
-def takeVideoInput(device):
+def take_video_input(device):
     cap = cv2.VideoCapture(device)
     return cap
 
 
-def produceDate(inputIdx, clientId, redisObject):
-    cp = takeVideoInput(inputIdx)
+def produce_data(input, clientId, redisObject):
+    cp = take_video_input(input)
 
     while True:
         ret, frame = cp.read()
@@ -30,7 +30,7 @@ def produceDate(inputIdx, clientId, redisObject):
     cv2.destroyAllWindows()
 
 
-def consumeData(callerId, pubsub_client):
+def consume_data(callerId, pubsub_client):
     while True:
         msg = pubsub_client.get_message()
         if msg != None:
@@ -52,5 +52,3 @@ def consumeData(callerId, pubsub_client):
         # If the user presses 'q', exit the loop
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
-# consumeStream()
